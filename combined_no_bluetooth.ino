@@ -2,6 +2,9 @@
 #include <avr/io.h>
 #include <Wire.h>
 
+//state machine count
+int count=0;
+
 //Flex Sensor Arduino Pins
 int flex_1 = 18;
 int flex_2 = 19;
@@ -137,11 +140,15 @@ void loop() {
   Serial.print(", ");
 
  //BIOZ
+ if ((count == 129) || (count ==0)) {
   bioz = getBioz();
+  count = 1;
+ }
   Serial.println(bioz);
 
 //delay
   delay(8);
+  count += 1;
   
 }
 
